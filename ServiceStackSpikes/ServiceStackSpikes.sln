@@ -3,6 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationServiceStack", "WebApplicationServiceStack\WebApplicationServiceStack.csproj", "{26227F64-8C90-4B03-8EC1-56E0565ACD9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrmLiteConsole", "OrmLiteConsole\OrmLiteConsole.csproj", "{2B1BE4AF-0B83-448C-825C-6A13E793ED69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9A3AA099-44C9-4623-93FC-B3DB5F68384A}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +22,10 @@ Global
 		{26227F64-8C90-4B03-8EC1-56E0565ACD9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26227F64-8C90-4B03-8EC1-56E0565ACD9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26227F64-8C90-4B03-8EC1-56E0565ACD9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B1BE4AF-0B83-448C-825C-6A13E793ED69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B1BE4AF-0B83-448C-825C-6A13E793ED69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B1BE4AF-0B83-448C-825C-6A13E793ED69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B1BE4AF-0B83-448C-825C-6A13E793ED69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
