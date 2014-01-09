@@ -12,8 +12,14 @@ namespace OrmLiteConsole
 
             const string name = "Ken****************";
             const string email = "ken.burkhardt@gmail.com";
-            
-            var assignees = manager.GetAssignees(Guid.Empty, name, email);
+            var id = Guid.Parse("517B5AFC-B69C-46AA-BE34-E1B3DE80B1E0");
+            const bool sendKm = true;
+            int? testNumber = 1;
+            const int testNumber2 = 2;
+
+            //ar assignees = manager.GetAssignees(id, name, email, sendKm, null, null);
+            //var assignees = manager.GetAssignees(id, name, email, sendKm, testNumber, testNumber2);
+            var assignees = manager.GetAssignees(null, name, email, sendKm, testNumber, testNumber2);
 
             foreach (var assignee in assignees)
             {

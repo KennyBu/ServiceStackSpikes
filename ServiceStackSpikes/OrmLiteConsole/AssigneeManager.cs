@@ -8,16 +8,19 @@ namespace OrmLiteConsole
     public interface IAssigneeManager
     {
         ICollection<Assignee> GetAssignees();
-        ICollection<Assignee> GetAssignees(Guid id, string name, string email);
+        ICollection<Assignee> GetAssignees(Guid? id, string name, string email, bool? sendKm,
+            int? testNumber, int? testNumber2);
     }
 
     public class AssigneeManager : IAssigneeManager
     {
         private readonly OrmLiteConnectionFactory _dbFactory;
+        private readonly SqlBuilder _sqlBuilder;
 
         public AssigneeManager(string connectionString)
         {
             _dbFactory = new OrmLiteConnectionFactory(connectionString, SqlServerOrmLiteDialectProvider.Instance);
+            _sqlBuilder = new SqlBuilder();
         }
         
         public ICollection<Assignee> GetAssignees()
@@ -28,36 +31,24 @@ namespace OrmLiteConsole
             }
         }
 
-        public ICollection<Assignee> GetAssignees(Guid id, string name, string email)
+        public ICollection<Assignee> GetAssignees(Guid? id, string name, string email, bool? sendKm,
+            int? testNumber, int? testNumber2)
         {
-            var sql = new List<string>();
-            var values = new Dictionary<string, object>();
+            _sqlBuilder.Initialize();
 
-            if(id != Guid.Empty)
-            {
-                sql.Add("Id = @Id");    
-                values.Add("Id", id);
-            }
+            _sqlBuilder.AddParameter("Id", id);
+            _sqlBuilder.AddParameter("Name", name);
+            _sqlBuilder.AddParameter("Email", email);
+            _sqlBuilder.AddParameter("SendKm", sendKm);
+            _sqlBuilder.AddParameter("TestNumber", testNumber);
+            _sqlBuilder.AddParameter("TestNumber2", testNumber2);
 
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                sql.Add("Name Like @Name");
-                values.Add("Name", name.SearchExpressionToSql());
-            }
-
-            if (!string.IsNullOrWhiteSpace(email))
-            {
-                sql.Add("Email Like @Email");
-                values.Add("Email", email.SearchExpressionToSql());
-            }
-            
-            var final = string.Join(" AND ", sql);
+            var final = _sqlBuilder.Build("AND");
 
             using (var db = _dbFactory.OpenDbConnection())
             {
-                return db.Select<Assignee>(final, values);
+                return db.Select<Assignee>(final, _sqlBuilder.BuildParameters);
             }
-
         }
     }
 }
